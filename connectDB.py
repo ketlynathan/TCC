@@ -3,8 +3,7 @@ import pyodbc
 from loguru import logger
 timeStart = time.time()
 
-
-def obter_credenciais_e_usuarios():
+def BancoDados():
     dadosConexao = (
         r"Driver={SQL Server};"
         r"Server=GIGANTE_SEGURO\SQLKEH;"
@@ -14,12 +13,16 @@ def obter_credenciais_e_usuarios():
 
     try:
         conexao = pyodbc.connect(dadosConexao)
-        print("Conexão bem sucedida!")
-        return  conexao
+        logger.info("Conexão bem sucedida!")
+        return conexao
 
     except pyodbc.Error as e:
-        print(f'Erro ao conectar ao banco de dados: {e}')
-        return None, None, None
+        logger.error(f'Erro ao conectar ao banco de dados: {e}')
+        return None
 
-finalTime= time.time()
-logger.info(f"Canexão feita ao DB\n{int(timeStart - finalTime)}-segundos")
+if __name__ == "__main__":
+    timeStart = time.time()
+    conexao = BancoDados()
+    finalTime = time.time()
+    logger.info(f"Conexão feita ao DB em {int(finalTime - timeStart)} segundos")
+    
