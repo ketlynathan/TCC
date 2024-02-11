@@ -1,0 +1,6 @@
+2024-02-11 15:16:28,766:root:ERROR:Ihh, deu erro!
+2024-02-11 15:16:28,766:root:WARNING:Algo de errado, não está certo!
+2024-02-11 15:16:28,766:root:DEBUG:entrei aqui!
+2024-02-11 15:16:28,774:root:DEBUG:sai daqui
+2024-02-11 15:16:28,774:root:INFO:Pessoa logou
+2024-02-11 15:16:28,774:root:CRITICAL:senha 123
