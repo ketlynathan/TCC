@@ -13,16 +13,11 @@ def BancoDados():
 
     try:
         conexao = pyodbc.connect(dadosConexao)
-        logger.info("Conexão bem sucedida!")
+        logger.info("successful connection!")
         return conexao
 
     except pyodbc.Error as e:
-        logger.error(f'Erro ao conectar ao banco de dados: {e}')
+        logger.error(f'Error connecting to database: {e}')
         return None
-
-if __name__ == "__main__":
-    timeStart = time.time()
-    conexao = BancoDados()
-    finalTime = time.time()
-    logger.info(f"Conexão feita ao DB em {int(finalTime - timeStart)} segundos")
-    
+finalTime = time.time()
+logger.info(f"Connection made in database  {int(finalTime - timeStart)} seconds")
