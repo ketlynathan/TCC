@@ -1,14 +1,15 @@
 import pandas as pd
 import time
 from loguru import logger
-from connectDB import BancoDados 
+from dataBase import DataBaseConnector 
 
 
 # Obter as credenciais
-conexao = BancoDados()
+database_connector = DataBaseConnector()
+conexao = database_connector.connect()
 timeStart = time.time()
 
-def inserir_dataframe_no_banco(dataframe):
+def InserirDataframeNoBanco(dataframe):
     if conexao:
         cursor = conexao.cursor()
         logger.info(conexao)
@@ -17,12 +18,12 @@ def inserir_dataframe_no_banco(dataframe):
         logger.info("reading dataframe")
 
         for index, row in df.iterrows():
-            tipo = row['Tipo']
+            tipo = row['Type']
             titulo = row['Title']
-            tempo = row['Tempo']
-            distancia = row['Distancia']
-            elevacao = row['Elevacao']
-            data = row['Data']
+            tempo = row['Time']
+            distancia = row['Distance']
+            elevacao = row['Elevation']
+            data = row['Date']
         
 
             comando = f"""EXEC [SP_InserirStravaActivity]
@@ -32,10 +33,6 @@ def inserir_dataframe_no_banco(dataframe):
                 @Time = '{tempo}',
                 @Distance = '{distancia}',
                 @Elevation = '{elevacao}'"""
-        
-
-            
-            cursor.execute(comando)
             
 
         conexao.commit()
