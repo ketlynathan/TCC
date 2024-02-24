@@ -31,7 +31,12 @@ def limpar_converter_dataframe(df):
     # Ajuste na coluna 'Tempo'
     df['Time'] = df['Time'].apply(lambda x: '00:' + x if isinstance(x, str) and len(x) == 5 else x)
 
-    df.to_excel("sports.xlsx", index=False)
+    caminho_arquivo = "./strava/view/sports.xlsx"
+
+    # Salvar o DataFrame no arquivo Excel
+    df.to_excel(caminho_arquivo, index=False)
+
+    print(f"DataFrame salvo com sucesso em {caminho_arquivo}")
     
     return df
 

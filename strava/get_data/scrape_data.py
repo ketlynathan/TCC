@@ -1,15 +1,18 @@
 from playwright.sync_api import sync_playwright
-from loguru import logger
-import time
-from getCredential import ObterCredenciais
+from credential import CredenciaisManager
 from bs4 import BeautifulSoup
+from loguru import logger
 import pandas as pd
+import time
+
 
 class StravaScraper:
-    def __init__(self):
-        self.credentials, _ = ObterCredenciais()
 
-    def scrape_strava_activities(self):
+    def __init__(self):
+        cred_manager = CredenciaisManager()
+        self.credentials, _ = cred_manager.obter_credenciais()
+
+    def strava_activities(self):
         time_start = time.time()
 
         logger.debug("Starting website access")
@@ -55,4 +58,4 @@ class StravaScraper:
 
 if __name__ == "__main__":
     scraper = StravaScraper()
-    activities = scraper.scrape_strava_activities()
+    activities = scraper.strava_activities()

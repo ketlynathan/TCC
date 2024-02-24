@@ -1,19 +1,18 @@
 import pandas as pd
 import time
 from loguru import logger
-from dataBase import DataBaseConnector 
-
+from database import DataBaseConnector 
+import pyodbc
 
 # Obter as credenciais
 database_connector = DataBaseConnector()
 conexao = database_connector.connect()
 timeStart = time.time()
 
-def InserirDataframeNoBanco(dataframe):
+def inserir_dtframe_banco(dataframe):
     if conexao:
         cursor = conexao.cursor()
-        logger.info(conexao)
-
+        
         df= dataframe
         logger.info("reading dataframe")
 
@@ -25,7 +24,6 @@ def InserirDataframeNoBanco(dataframe):
             elevacao = row['Elevation']
             data = row['Date']
         
-
             comando = f"""EXEC [SP_InserirStravaActivity]
                 @Type = '{tipo}',
                 @Date = '{data}',
@@ -34,13 +32,24 @@ def InserirDataframeNoBanco(dataframe):
                 @Distance = '{distancia}',
                 @Elevation = '{elevacao}'"""
             
-
-        conexao.commit()
+            try:
+                cursor.execute(comando)
+                conexao.commit()
+                logger.info("Data successfully inserted")
+            except pyodbc.IntegrityError as e:
+                # Capturar a exceção de violação de chave única
+                logger.error(f"Error inserting data: {e}")
+                # Decidir como lidar com a exceção, como registrar, pular ou interromper o processamento
 
         cursor.close()
         conexao.close()
-        logger.info("data successfully")
         timeEnd = time.time()
-        logger.info(f"Insert data in  {int(timeEnd - timeStart)} seconds")
+        logger.info(f"Insert data in {int(timeEnd - timeStart)} seconds")
     else:
         logger.error("Unable to get connection")
+
+# Exemplo de uso
+if __name__ == "__main__":
+    # Carregar DataFrame pandas com os dados a serem inseridos
+    dataframe = pd.read_csv('seu_arquivo.csv')
+    inserir_dtframe_banco(dataframe)

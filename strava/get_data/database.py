@@ -34,6 +34,6 @@ class DataBaseConnector:
             return None
 
 # Exemplo de uso da classe
-if __name__ == "__main__":
-    database_connector = DataBaseConnector()
-    conexao = database_connector.connect()
+#if __name__ == "__main__":
+    #database_connector = DataBaseConnector()
+    #conexao = database_connector.connect()

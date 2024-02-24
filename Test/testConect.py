@@ -1,6 +1,6 @@
 import unittest
-from Data_Base import BancoDados
-from strava.getCredential import ObterCredenciais
+from strava.get_data.database import BancoDados
+from strava.get_data.credential import ObterCredenciais
 
 class TestBancoDados(unittest.TestCase):
     def TestConexaoDados(self):

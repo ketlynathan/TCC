@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime, timedelta
-import calendar
 
 # Define o título da página
 st.set_page_config(page_title="Minhas Atividades")
@@ -15,7 +13,7 @@ with st.container():
 
 # Carrega os dados do arquivo Excel
 with st.container():
-    st.write("---")
+    #t.write("---")
     file = 'sports.xlsx'
     if "data" not in st.session_state:
         df_dados = pd.read_excel(file)
