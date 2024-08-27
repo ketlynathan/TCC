@@ -5,13 +5,14 @@ def limpar_converter_dataframe(df):
     # Função para converter a data
     def converter_data(data):
         componentes = data.split(',')[1].strip().split('/')
-        if len(componentes[0]) == 2:
-            return pd.to_datetime(data.split(',')[1].strip(), format='%d/%m/%Y').strftime('%Y-%m-%d')
-        else:
-            return pd.to_datetime(data.split(',')[1].strip(), format='%m/%d/%Y').strftime('%Y-%m-%d')
+        
+        #logger.info("data no formato %m/%d/%Y")
+            
+        return pd.to_datetime(data.split(',')[1].strip(), format='%m/%d/%Y').strftime('%Y-%m-%d')
 
     # Aplicar a função converter_data à coluna 'Data'
     df['Date'] = df['Date'].apply(converter_data)
+    
 
     # Limpeza da coluna 'Distancia'
     df['Distance'] = df['Distance'].str.replace('\n', '').str.replace(' km', '').str.replace(',', '.').str.strip()
@@ -31,12 +32,12 @@ def limpar_converter_dataframe(df):
     # Ajuste na coluna 'Tempo'
     df['Time'] = df['Time'].apply(lambda x: '00:' + x if isinstance(x, str) and len(x) == 5 else x)
 
-    caminho_arquivo = "./strava/view/sports.xlsx"
+    #caminho_arquivo = "./strava/view/sports.xlsx"
 
     # Salvar o DataFrame no arquivo Excel
-    df.to_excel(caminho_arquivo, index=False)
+    #df.to_excel(caminho_arquivo, index=False)
 
-    print(f"DataFrame salvo com sucesso em {caminho_arquivo}")
+   # print(f"DataFrame salvo com sucesso em {caminho_arquivo}")
     
     return df
 

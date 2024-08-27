@@ -51,5 +51,4 @@ def inserir_dtframe_banco(dataframe):
 # Exemplo de uso
 if __name__ == "__main__":
     # Carregar DataFrame pandas com os dados a serem inseridos
-    dataframe = pd.read_csv('seu_arquivo.csv')
     inserir_dtframe_banco(dataframe)
