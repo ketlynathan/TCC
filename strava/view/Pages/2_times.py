@@ -3,8 +3,6 @@ import plotly.express as px
 import altair as alt
 import pandas as pd
 
-df_dados = st.session_state["data"]
-
 sports = df_dados["Type"].value_counts().index
 sport = st.sidebar.selectbox("Type", sports)
 

@@ -1,5 +1,5 @@
 from scrape_data import StravaScraper
- from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright
 from trans_data import limpar_converter_dataframe
 from InsertData import inserir_dtframe_banco
 from loguru import logger
